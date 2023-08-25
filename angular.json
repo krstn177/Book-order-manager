@@ -68,7 +68,8 @@
               "browserTarget": "Book-order-manager:build:production"
             },
             "development": {
-              "browserTarget": "Book-order-manager:build:development"
+              "browserTarget": "Book-order-manager:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
@@ -100,5 +101,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "c58d2ac6-bc8d-413e-a5af-59ce318044ba"
   }
 }

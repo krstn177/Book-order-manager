@@ -5,12 +5,12 @@ import { OrderListComponent } from './order-list/order-list.component';
 
 const routes: Routes = [
   {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
     path: '',
     component: OrderListComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   }
 ];
 

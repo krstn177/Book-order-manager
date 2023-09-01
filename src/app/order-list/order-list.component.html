@@ -1,11 +1,8 @@
-<div class="vh-100 w-100 d-flex justify-content-center align-items-center" *ngIf="errorMsg">
-    <p class="fw-bold lh-base text-light fs-1">{{errorMsg}}!</p>
-</div>
+<app-nav [isNotLoginPage]="true"></app-nav>
 
-<div class="w-100 d-flex justify-content-center align-items-center" *ngIf="isLoading">
-    <div class="spinner-border text-light" style="width: 5rem; height: 5rem;" role="status">
-    </div>
-</div>
+<app-error-message [errorMsg]="errorMsg"></app-error-message>
+
+<app-loader [isLoading]="isLoading"></app-loader>
 
 <table *ngIf="!errorMsg && !isLoading" class="table table-danger w-75 text-center" style="margin: 20px auto; border-radius: 10px; overflow: hidden">
     <thead>

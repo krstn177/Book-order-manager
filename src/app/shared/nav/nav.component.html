@@ -1,0 +1,4 @@
+<div class="d-flex justify-content-center m-2">
+    <button *ngIf="this.authService.isLoggedIn() && isNotLoginPage" class="btn btn-danger btn-lg btn-block border border-light inline-block" (click)="logout()">Logout</button>
+    <h2 class="text-light text-center fw-bold display-1" *ngIf="!isNotLoginPage">Booking System</h2>
+</div>

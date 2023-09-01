@@ -43,7 +43,7 @@ export class LoginComponent {
         this.alertColor = 'success';
         setTimeout(async () => {
           await this.router.navigateByUrl('');
-        }, 2000)
+        }, 1000)
       },
       error: (errObj) => {
         this.alertMsg = 'Oops! Something went wrong';

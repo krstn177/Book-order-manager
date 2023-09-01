@@ -10,7 +10,9 @@ import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InputComponent } from './shared/input/input.component';
 import { AlertComponent } from './shared/alert/alert.component';
-import { LogoutComponent } from './logout/logout.component';
+import { LoaderComponent } from './shared/loader/loader.component';
+import { ErrorMessageComponent } from './shared/error-message/error-message.component';
+import { NavComponent } from './shared/nav/nav.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { LogoutComponent } from './logout/logout.component';
     LoginComponent,
     InputComponent,
     AlertComponent,
-    LogoutComponent
+    LoaderComponent,
+    ErrorMessageComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,

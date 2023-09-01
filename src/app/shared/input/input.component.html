@@ -1,0 +1,31 @@
+<input
+  [formControl]="control"
+  [type]="type"
+  [placeholder]="placeholder"
+  [id]="id"
+  class="form-control form-control-lg text-center"
+/>
+<ng-container *ngIf="control.touched && control.dirty">
+    <p
+      *ngIf="control.errors?.['required']"
+      class="text-danger text-center"
+    >
+      Field is required.
+    </p>
+    <p
+      *ngIf="control.errors?.['minlength']"
+      class="text-danger text-center"
+    >
+      The value you inputed was
+      {{control.errors?.['minlength']['actualLength']}}
+      characters long. The value must between 3 and 15 characters long.
+    </p>
+    <p
+      *ngIf="control.errors?.['maxlength']"
+      class="text-danger text-center"
+    >
+      The value you inputed was
+      {{control.errors?.['maxlength']['actualLength']}}
+      characters long. The value must between 3 and 15 characters long.
+    </p>
+</ng-container>

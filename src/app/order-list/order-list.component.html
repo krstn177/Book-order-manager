@@ -1,1 +1,37 @@
-<p *ngFor="let order of orderList">{{order.address}}</p>
+<div class="vh-100 w-100 d-flex justify-content-center align-items-center" *ngIf="errorMsg">
+    <p class="fw-bold lh-base text-light fs-1">{{errorMsg}}!</p>
+</div>
+
+<div class="w-100 d-flex justify-content-center align-items-center" *ngIf="isLoading">
+    <div class="spinner-border text-light" style="width: 5rem; height: 5rem;" role="status">
+    </div>
+</div>
+
+<table *ngIf="!errorMsg && !isLoading" class="table table-danger w-75 text-center" style="margin: 20px auto; border-radius: 10px; overflow: hidden">
+    <thead>
+      <tr>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>      
+        <th scope="col">Email</th>      
+        <th scope="col">Phone Number</th>      
+        <th scope="col">Address</th>
+        <th scope="col">Count</th>
+        <th scope="col">Done</th>
+        <th scope="col">Ordered At</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orderList">
+        <td>{{order.firstName}}</td>
+        <td>{{order.lastName}}</td>
+        <td>{{order.email}}</td>
+        <td>{{order.phoneNumber}}</td>
+        <td>{{order.address}}</td>
+        <td>{{order.count}}</td>
+        <td>{{order.isCompleted}}</td>
+        <td>{{order.createdAt}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+

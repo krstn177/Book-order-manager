@@ -8,13 +8,19 @@ import { Order } from '../models/order';
   styleUrls: ['./order-list.component.scss']
 })
 export class OrderListComponent implements OnInit {
-  orderList: Order[] = []
+  orderList: Order[] = [];
+  errorMsg: string = '';
+  isLoading: boolean = true;
   constructor(private service: OrdersServiceService) {
     
   }
   ngOnInit(): void {
-    this.service.getOrders().subscribe(orders => {
-      this.orderList = orders
+    this.service.getOrders().subscribe({
+      next: (orders) => {
+        this.orderList = orders
+        this.isLoading = false;
+      },
+      error: (errObj) => this.errorMsg = errObj.error.message
     });
   }
 }

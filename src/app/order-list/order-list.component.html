@@ -2,9 +2,51 @@
 
 <app-error-message [errorMsg]="errorMsg"></app-error-message>
 
-<app-loader [isLoading]="isLoading"></app-loader>
+<h2 class="display-2 text-center text-light fw-bold">To Be Completed</h2>
+<app-loader [isLoading]="isLoadingNotCompleted"></app-loader>
+<table *ngIf="!errorMsg && !isLoadingNotCompleted" class="table table-danger w-75 text-center" style="margin: 20px auto; border-radius: 10px; overflow: hidden">
+  <thead>
+    <tr>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>      
+      <th scope="col">Email</th>      
+      <th scope="col">Phone Number</th>      
+      <th scope="col">Address</th>
+      <th scope="col">Count</th>
+      <th scope="col">Done</th>
+      <th scope="col">Ordered At</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of notCompletedOrderList">
+      <td>{{order.firstName}}</td>
+      <td>{{order.lastName}}</td>
+      <td>{{order.email}}</td>
+      <td>{{order.phoneNumber}}</td>
+      <td>{{order.address}}</td>
+      <td>{{order.count}}</td>
+      <td>
+        <button (click)="completeOrder(order._id)" type="button" class="btn btn-outline-success">
+          <i class="fa-solid fa-check"></i>
+        </button>
+      </td>
+      <td>{{order.createdAt}}</td>
+      <td>
+        <button type="button" class="btn btn-warning" style="margin-right: 5px">
+          <i class="fa-regular fa-pen-to-square"></i>
+        </button>
+        <button type="button" class="btn btn-danger">
+          <i class="fa-regular fa-trash-can"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-<table *ngIf="!errorMsg && !isLoading" class="table table-danger w-75 text-center" style="margin: 20px auto; border-radius: 10px; overflow: hidden">
+<h2 class="display-2 text-center text-light fw-bold">Completed</h2>
+<app-loader [isLoading]="isLoadingCompleted"></app-loader>
+<table *ngIf="!errorMsg && !isLoadingCompleted" class="table table-danger w-75 text-center" style="margin: 20px auto; border-radius: 10px; overflow: hidden">
     <thead>
       <tr>
         <th scope="col">First Name</th>
@@ -15,20 +57,30 @@
         <th scope="col">Count</th>
         <th scope="col">Done</th>
         <th scope="col">Ordered At</th>
+        <th scope="col">Actions</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let order of orderList">
+      <tr *ngFor="let order of completedOrderList">
         <td>{{order.firstName}}</td>
         <td>{{order.lastName}}</td>
         <td>{{order.email}}</td>
         <td>{{order.phoneNumber}}</td>
         <td>{{order.address}}</td>
         <td>{{order.count}}</td>
-        <td>{{order.isCompleted}}</td>
+        <td>Completed</td>
         <td>{{order.createdAt}}</td>
+        <td>
+          <button type="button" class="btn btn-warning" style="margin-right: 5px">
+            <i class="fa-regular fa-pen-to-square"></i>
+          </button>
+          <button type="button" class="btn btn-danger">
+            <i class="fa-regular fa-trash-can"></i>
+          </button>
+        </td>
       </tr>
     </tbody>
-  </table>
+</table>
+
 
 

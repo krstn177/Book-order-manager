@@ -8,19 +8,44 @@ import { Order } from '../models/order';
   styleUrls: ['./order-list.component.scss']
 })
 export class OrderListComponent implements OnInit {
-  orderList: Order[] = [];
+  completedOrderList: Order[] = [];
+  notCompletedOrderList: Order[] = [];
   errorMsg: string = '';
-  isLoading: boolean = true;
+  isLoadingCompleted: boolean = true;
+  isLoadingNotCompleted: boolean = true;
   constructor(private service: OrdersServiceService) {
     
   }
   ngOnInit(): void {
-    this.service.getOrders().subscribe({
+    this.service.getByCompleted().subscribe({
       next: (orders) => {
-        this.orderList = orders
-        this.isLoading = false;
+        this.completedOrderList = orders
+        this.isLoadingCompleted = false;
       },
       error: (errObj) => this.errorMsg = errObj.error.message
     });
+    this.service.getByNotCompleted().subscribe({
+      next: (orders) => {
+        this.notCompletedOrderList = orders
+        this.isLoadingNotCompleted = false;
+      },
+      error: (errObj) => this.errorMsg = errObj.error.message
+    });
+  }
+
+  completeOrder(id: string){
+    const order = this.notCompletedOrderList.find(o => o._id === id);
+    if (order) {
+      const orderIndex = this.notCompletedOrderList.indexOf(order);
+      this.service.completeOrder(id).subscribe({
+        next: () => {
+          this.notCompletedOrderList.splice(orderIndex, 1)
+          this.completedOrderList.push(order);
+          console.log('success');
+          console.log(order._id);
+        },
+        error: (errObj) => this.errorMsg = errObj.error.message
+      })  
+    }
   }
 }

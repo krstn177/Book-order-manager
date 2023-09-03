@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Order } from '../models/order'; 
 import { AuthService } from './auth-service.service';
 
@@ -9,18 +9,32 @@ import { AuthService } from './auth-service.service';
 export class OrdersServiceService {
   orders: Order[] = [];
   constructor(private http: HttpClient, private auth: AuthService) { }
+  token = this.auth.getToken() || '';
+  headerDict = {
+    'Content-Type': 'application/json',
+    'X-Authorization': this.token
+  }
+  
+  requestOptions = {                                                                                                                                                                                 
+    headers: new HttpHeaders(this.headerDict),
+  };
+
+  getByCompleted() {
+    const reqOptionsQuery = Object.assign(this.requestOptions, {params: new HttpParams().set('where', 'isCompleted=true')});
+    return this.http.get<Order[]>('api/orders', reqOptionsQuery);
+  }
+
+  getByNotCompleted() {
+    const reqOptionsQuery = Object.assign(this.requestOptions, {params: new HttpParams().set('where', 'isCompleted=false')});
+    return this.http.get<Order[]>('api/orders', reqOptionsQuery);
+  }
 
   getOrders() {
-    const token = this.auth.getToken() || ''; //to be added logic
-    const headerDict = {
-      'Content-Type': 'application/json',
-      'X-Authorization': token
-    }
-    
-    const requestOptions = {                                                                                                                                                                                 
-      headers: new HttpHeaders(headerDict),
-    };
-    return this.http.get<Order[]>('api/orders', requestOptions);
+    return this.http.get<Order[]>('api/orders', this.requestOptions);
+  }
+
+  completeOrder(id: string) {
+    return this.http.get<any>(`api/orders/${id}/complete`, this.requestOptions);
   }
 
 }

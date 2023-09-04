@@ -27,9 +27,7 @@ export class LoginComponent {
     ])
   });
 
-  constructor(private authService: AuthService, private router: Router) {
-
-  }
+  constructor(private authService: AuthService, private router: Router) { }
   
   async login(){
     this.inSubmission = true;
@@ -37,13 +35,13 @@ export class LoginComponent {
     this.alertMsg = 'Please wait! You are getting logged in.';
     this.alertColor = 'primary';
     this.authService.login(this.loginForm.value).subscribe({
-      next: (retObj) => {
-        this.authService.setToken(retObj.accessToken)
+      next: async (retObj) => {
+        await this.authService.setToken(retObj.accessToken);
         this.alertMsg = 'Success!';
         this.alertColor = 'success';
         setTimeout(async () => {
           await this.router.navigateByUrl('');
-        }, 1000)
+        }, 1000);
       },
       error: (errObj) => {
         this.alertMsg = 'Oops! Something went wrong';

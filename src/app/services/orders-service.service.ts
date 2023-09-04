@@ -9,7 +9,7 @@ import { AuthService } from './auth-service.service';
 export class OrdersServiceService {
   orders: Order[] = [];
   constructor(private http: HttpClient, private auth: AuthService) { }
-  token = this.auth.getToken() || '';
+  token = this.auth.getToken();
   headerDict = {
     'Content-Type': 'application/json',
     'X-Authorization': this.token
@@ -19,13 +19,26 @@ export class OrdersServiceService {
     headers: new HttpHeaders(this.headerDict),
   };
 
+  headerReSetter() {
+    this.token = this.auth.getToken();
+    this.headerDict = {
+      'Content-Type': 'application/json',
+      'X-Authorization': this.token
+    }
+    this.requestOptions = { 
+      headers: new HttpHeaders(this.headerDict)
+    }
+  }
+  
   getByCompleted() {
-    const reqOptionsQuery = Object.assign(this.requestOptions, {params: new HttpParams().set('where', 'isCompleted=true')});
+    this.headerReSetter();
+    const reqOptionsQuery = {...this.requestOptions, params: new HttpParams().set('where', 'isCompleted=true')};
     return this.http.get<Order[]>('api/orders', reqOptionsQuery);
   }
 
   getByNotCompleted() {
-    const reqOptionsQuery = Object.assign(this.requestOptions, {params: new HttpParams().set('where', 'isCompleted=false')});
+    this.headerReSetter();
+    const reqOptionsQuery = {...this.requestOptions, params: new HttpParams().set('where', 'isCompleted=false')};
     return this.http.get<Order[]>('api/orders', reqOptionsQuery);
   }
 
@@ -35,6 +48,24 @@ export class OrdersServiceService {
 
   completeOrder(id: string) {
     return this.http.get<any>(`api/orders/${id}/complete`, this.requestOptions);
+  }
+
+  updateOrder(id: string, firstName: string, lastName: string, email: string, address: string, phoneNumber: string, count: number) {
+    const order = {
+      _id: id,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      address: address,
+      phoneNumber: phoneNumber,
+      count: count
+    }
+
+    return this.http.put<any>(`api/orders/${id}`, JSON.stringify(order), this.requestOptions);
+  }
+
+  deleteOrder(id: string) {
+    return this.http.delete<any>(`api/orders/${id}`, this.requestOptions);
   }
 
 }

@@ -1,19 +1,37 @@
-<div class="modal" tabindex="-1"
-[ngClass]="{ hidden: !modal.isModalOpen(modalId) }">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Modal title</h5>
-          <button type="button" class="btn-close" (click)="closeModal()" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>Modal body text goes here.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
+<div
+  class="vw-100 vh-100"
+  style="
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.438);
+  "
+  [ngClass]="modal.isModalOpen(modalId) ? 'visible' : 'invisible'"
+>
+  <div
+    class="card w-50"
+    style="
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    "
+  >
+    <div
+      class="card-header d-flex justify-content-between"
+      style="background-color: #930325"
+    >
+      <p class="h4 text-light">Booking System</p>
+      <button
+        type="button"
+        class="btn-close btn-close-white d-inline-block"
+        (click)="closeModal()"
+        aria-label="Close"
+      ></button>
+    </div>
+    <div class="card-body text-center">
+      <ng-content></ng-content>
     </div>
   </div>
-  
+</div>

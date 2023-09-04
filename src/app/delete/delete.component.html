@@ -1,0 +1,15 @@
+<app-modal [modalId]="modId">
+    <p class="h1 fw-bold">Are you sure you want to delete this order?</p>
+
+    <app-alert *ngIf="showAlert" [color]="alertColor">
+        <p>{{ alertMsg }}</p>
+    </app-alert>
+    <div class="mt-4 d-flex justify-content-around">
+        <button (click)="deleteOrder()" class="btn btn-danger">
+          Delete
+        </button>
+        <button (click)="closeModal()" class="btn btn-danger">
+          Cancel
+        </button>
+    </div>
+</app-modal>

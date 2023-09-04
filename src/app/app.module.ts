@@ -9,13 +9,17 @@ import { OrderListComponent } from './order-list/order-list.component';
 import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
+import { EditComponent } from './edit/edit.component';
+import { DeleteComponent } from './delete/delete.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     OrderListComponent,
-    LoginComponent
+    LoginComponent,
+    EditComponent,
+    DeleteComponent
   ],
   imports: [
     BrowserModule,

@@ -9,10 +9,15 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   getToken(){
-    return localStorage.getItem('accessToken');
+    const token = localStorage.getItem('accessToken')
+    if (token) {
+      return token;
+    } else{
+      return '';
+    }
   }
 
-  setToken(token: string) {
+  async setToken(token: string) {
     localStorage.setItem('accessToken', token);
   }
 

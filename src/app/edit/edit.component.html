@@ -1,0 +1,67 @@
+<app-modal modalId="editOrder">
+  <p class="h1 fw-bold">Edit Order</p>
+
+  <app-alert *ngIf="showAlert" [color]="alertColor">
+    <p>{{ alertMsg }}</p>
+  </app-alert>
+
+  <!-- Form -->
+  <form [formGroup]="editForm" (ngSubmit)="submit()">
+    <div class="mt-4">
+      <label class="d-block h5">First Name</label>
+      <app-input
+        [control]="editForm.controls.firstName"
+        placeholder="Enter First Name"
+      >
+      </app-input>
+
+      <label class="d-block h5">Last Name</label>
+      <app-input
+        [control]="editForm.controls.lastName"
+        placeholder="Enter Last Name"
+      >
+      </app-input>
+
+      <label class="d-block h5">Email</label>
+      <app-input
+        [control]="editForm.controls.email"
+        placeholder="Enter Email"
+      >
+      </app-input>
+
+      <label class="d-block h5">Address</label>
+      <app-input
+        [control]="editForm.controls.address"
+        placeholder="Enter Address"
+      >
+      </app-input>
+
+      <label class="d-block h5">Phone Number</label>
+      <app-input
+        [control]="editForm.controls.phoneNumber"
+        placeholder="Enter Phone Number"
+      >
+      </app-input>
+
+      <label class="d-block h5">Count</label>
+      <app-input
+        [control]="editForm.controls.count"
+        type="number"
+        placeholder="Enter Count"
+      >
+      </app-input>
+
+    </div>
+
+    <div class="mt-4 text-center">
+      <button
+        type="submit"
+        class="btn btn-danger"
+        [disabled]="inSubmission"
+        [disabled]="editForm.invalid"
+      >
+        Update
+      </button>
+    </div>
+  </form>
+</app-modal>

@@ -28,4 +28,28 @@
       {{control.errors?.['maxlength']['actualLength']}}
       characters long. The value must between 3 and 15 characters long.
     </p>
+    <p
+      *ngIf="control.errors?.['pattern']"
+      class="text-danger text-center"
+    >
+      The phone number you inputed was invalid
+    </p>
+    <p
+      *ngIf="control.errors?.['min']"
+      class="text-danger text-center"
+    >
+      The value you inputed was too small. The value must between 1 and 10.
+    </p>
+    <p
+      *ngIf="control.errors?.['max']"
+      class="text-danger text-center"
+    >
+      The value you inputed was too big. The value must between 1 and 10.
+    </p>
+    <p
+      *ngIf="control.errors?.['email']"
+      class="text-danger text-center"
+    >
+      Invalid email address.
+    </p>
 </ng-container>

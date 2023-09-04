@@ -4,7 +4,7 @@
 
 <h2 class="display-2 text-center text-light fw-bold">To Be Completed</h2>
 <app-loader [isLoading]="isLoadingNotCompleted"></app-loader>
-<table *ngIf="!errorMsg && !isLoadingNotCompleted" class="table table-danger w-75 text-center" style="margin: 20px auto; border-radius: 10px; overflow: hidden">
+<table *ngIf="!errorMsg && !isLoadingNotCompleted && notCompletedOrderList.length !== 0" class="table table-danger w-75 text-center" style="margin: 20px auto; border-radius: 10px; overflow: hidden">
   <thead>
     <tr>
       <th scope="col">First Name</th>
@@ -33,20 +33,21 @@
       </td>
       <td>{{order.createdAt}}</td>
       <td>
-        <button type="button" class="btn btn-warning" style="margin-right: 5px">
+        <button (click)="openEditModal(order)" type="button" class="btn btn-warning" style="margin-right: 5px">
           <i class="fa-regular fa-pen-to-square"></i>
         </button>
-        <button type="button" class="btn btn-danger">
+        <button (click)="openDeleteModal(order)" type="button" class="btn btn-danger">
           <i class="fa-regular fa-trash-can"></i>
         </button>
       </td>
     </tr>
   </tbody>
 </table>
+<h2 *ngIf="notCompletedOrderList.length === 0" class="display-4 text-center text-warning fw-bold">There are no incomplete orders</h2>
 
 <h2 class="display-2 text-center text-light fw-bold">Completed</h2>
 <app-loader [isLoading]="isLoadingCompleted"></app-loader>
-<table *ngIf="!errorMsg && !isLoadingCompleted" class="table table-danger w-75 text-center" style="margin: 20px auto; border-radius: 10px; overflow: hidden">
+<table *ngIf="!errorMsg && !isLoadingCompleted && completedOrderList.length !== 0" class="table table-danger w-75 text-center" style="margin: 20px auto; border-radius: 10px; overflow: hidden">
     <thead>
       <tr>
         <th scope="col">First Name</th>
@@ -71,16 +72,21 @@
         <td>Completed</td>
         <td>{{order.createdAt}}</td>
         <td>
-          <button type="button" class="btn btn-warning" style="margin-right: 5px">
+          <button (click)="openEditModal(order)" type="button" class="btn btn-warning" style="margin-right: 5px">
             <i class="fa-regular fa-pen-to-square"></i>
           </button>
-          <button type="button" class="btn btn-danger">
+          <button (click)="openDeleteModal(order)" type="button" class="btn btn-danger">
             <i class="fa-regular fa-trash-can"></i>
           </button>
         </td>
       </tr>
     </tbody>
 </table>
+<h2 *ngIf="completedOrderList.length === 0" class="display-4 text-center text-warning fw-bold">There are no complete orders</h2>
 
+<app-edit [activeOrder]="activeOrder"
+(update)="update($event)"></app-edit>
 
+<app-delete [activeOrder]="activeOrder"
+(deleteOrderEv)="deleteOrderEv($event)"></app-delete>
 

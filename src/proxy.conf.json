@@ -1,6 +1,6 @@
 {
     "/api": {
-      "target": "http://localhost:3030",
+      "target": "https://easy-red-clownfish-veil.cyclic.cloud",
       "secure": false,
       "changeOrigin": true,
       "logLevel": "debug",

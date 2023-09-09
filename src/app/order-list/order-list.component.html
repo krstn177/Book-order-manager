@@ -31,7 +31,7 @@
           <i class="fa-solid fa-check"></i>
         </button>
       </td>
-      <td>{{order.createdAt}}</td>
+      <td>{{order.createdAt | date:'medium'}}</td>
       <td>
         <button (click)="openEditModal(order)" type="button" class="btn btn-warning" style="margin-right: 5px">
           <i class="fa-regular fa-pen-to-square"></i>
@@ -70,7 +70,7 @@
         <td>{{order.address}}</td>
         <td>{{order.count}}</td>
         <td>Completed</td>
-        <td>{{order.createdAt}}</td>
+        <td>{{order.createdAt | date:'medium'}}</td>
         <td>
           <button (click)="openEditModal(order)" type="button" class="btn btn-warning" style="margin-right: 5px">
             <i class="fa-regular fa-pen-to-square"></i>

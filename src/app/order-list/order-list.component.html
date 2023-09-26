@@ -1,5 +1,11 @@
 <app-nav [isNotLoginPage]="true"></app-nav>
 
+<div class="d-flex justify-content-center">
+  <button (click)="refresh()" type="button" class="btn btn-danger border border-light">
+    <i class="fa-solid fa-rotate"></i>
+  </button>
+</div>
+
 <app-error-message [errorMsg]="errorMsg"></app-error-message>
 
 <h2 class="display-2 text-center text-light fw-bold">To Be Completed</h2>

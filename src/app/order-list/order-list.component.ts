@@ -20,6 +20,16 @@ export class OrderListComponent implements OnInit {
   constructor(private service: OrdersServiceService, private modal: ModalService, private router: Router) { }
 
   ngOnInit(): void {
+    this.refresh();
+  }
+
+  refresh() {
+
+    this.errorMsg = '';
+    this.isLoadingCompleted = true;
+    this.isLoadingNotCompleted = true;
+
+
     this.service.getByCompleted().subscribe({
       next: (orders) => {
         this.completedOrderList = orders

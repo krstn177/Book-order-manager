@@ -15,12 +15,13 @@ export class DeleteComponent implements OnInit, OnDestroy{
   showAlert = false;
   alertMsg = 'Please wait! Updating order.';
   alertColor = 'primary';
+  disableButton = false;
   inSubmission = false;
   modId = 'deleteOrder'
 
   constructor(private modal: ModalService, private orderService: OrdersServiceService) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {   
     this.modal.register(this.modId);
   }
 
@@ -39,6 +40,7 @@ export class DeleteComponent implements OnInit, OnDestroy{
 
     this.inSubmission = true;
     this.showAlert = true;
+    this.disableButton = true;
     this.alertColor = 'primary';
     this.alertMsg = 'Please wait! Updating order.';
 
@@ -47,12 +49,17 @@ export class DeleteComponent implements OnInit, OnDestroy{
         setTimeout(() => {
           this.deleteOrderEv.emit(this.activeOrder);
   
-          this.inSubmission = false;
           this.alertColor = 'success';
           this.alertMsg = 'Success';
+          this.inSubmission = false;
         }, 1000);
         setTimeout(()=>{
+          this.showAlert = false;
+          this.alertMsg = 'Please wait! Updating order.';
+          this.alertColor = 'primary';
+          this.inSubmission = false;
           this.modal.toggleModal(this.modId);
+          this.disableButton = false;
         }, 2000);
       },
       error: err => {
@@ -60,6 +67,13 @@ export class DeleteComponent implements OnInit, OnDestroy{
         this.alertColor = 'danger';
         this.alertMsg = 'Oops! Something went wrong!';
         console.log(err);
+        setTimeout(() => {
+          this.showAlert = false;
+          this.alertMsg = 'Please wait! Updating order.';
+          this.alertColor = 'primary';
+          this.modal.toggleModal(this.modId);
+          this.disableButton = false;
+        }, 2000)
       }
     })
   }

@@ -5,10 +5,10 @@
         <p>{{ alertMsg }}</p>
     </app-alert>
     <div class="mt-4 d-flex justify-content-around">
-        <button (click)="deleteOrder()" class="btn btn-danger">
+        <button [disabled]="disableButton" (click)="deleteOrder()" class="btn btn-danger">
           Delete
         </button>
-        <button (click)="closeModal()" class="btn btn-danger">
+        <button [disabled]="disableButton" (click)="closeModal()" class="btn btn-danger">
           Cancel
         </button>
     </div>

@@ -16,6 +16,7 @@ export class EditComponent implements OnInit, OnDestroy, OnChanges{
   regExpPhoneNumber = /^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
   showAlert = false;
   alertMsg = 'Please wait! Updating order.';
+  disableButton = false;
   alertColor = 'primary';
   inSubmission = false;
 
@@ -101,6 +102,7 @@ export class EditComponent implements OnInit, OnDestroy, OnChanges{
 
     this.inSubmission = true;
     this.showAlert = true;
+    this.disableButton = true;
     this.alertColor = 'primary';
     this.alertMsg = 'Please wait! Updating order.';
 
@@ -118,7 +120,12 @@ export class EditComponent implements OnInit, OnDestroy, OnChanges{
             this.atSuccess();
           }, 1000);
           setTimeout(() => {
+            this.showAlert = false;
+            this.alertMsg = 'Please wait! Updating order.';
+            this.alertColor = 'primary';
+            this.inSubmission = false;
             this.modal.toggleModal('editOrder');
+            this.disableButton = false;
           }, 3000)
         },
         error: error => {
@@ -126,9 +133,18 @@ export class EditComponent implements OnInit, OnDestroy, OnChanges{
           this.alertColor = 'danger';
           this.alertMsg = 'Something went wrong. Try again later'
           console.log(error);
+          setTimeout(() => {
+            this.showAlert = false;
+            this.alertMsg = 'Please wait! Updating order.';
+            this.alertColor = 'primary';
+            this.inSubmission = false;
+            this.modal.toggleModal('editOrder');
+            this.disableButton = false;
+          }, 3000)
         }
       });  
   }
+
   atSuccess(){
     if (!this.activeOrder) {
       return
